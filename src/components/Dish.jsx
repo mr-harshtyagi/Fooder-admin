@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Dish(){
+export default function Dish(props){
   const [check, setCheck]= useState(false);
   const [status, setStatus] = useState("In Stock");
   const [color, setColor] = useState("green");
@@ -25,7 +25,7 @@ export default function Dish(){
               borderRadius: "5px",
               marginRight: "20px",
             }}
-            src="images/pizza-logo.svg"
+            src={"../"+props.img}
             alt="dish-img"
           ></img>
 
@@ -59,9 +59,9 @@ export default function Dish(){
           </h6>
 
           <div style={{ marginTop: "20px" }}>
-            <h3 style={{ fontWeight: "800" }}>Pizza</h3>
+            <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
 
-            <h6 style={{ fontSize: "1.2rem", color: "grey" }}>{"₹ "} 100</h6>
+            <h6 style={{ fontSize: "1.2rem", color: "grey" }}>{"₹ "} {props.price}</h6>
           </div>
         </div>
       </div>

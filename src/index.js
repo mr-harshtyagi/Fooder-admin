@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import Restaurent from './components/Restaurent';
-import RestaurentStatus from './components/RestaurentStatus';
+import Restaurent from './pages/Restaurent';
+import RestaurentStatus from './pages/RestaurentStatus';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(

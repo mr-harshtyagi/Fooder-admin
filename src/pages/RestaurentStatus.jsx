@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 
 export default function RestaurentStatus() {
@@ -59,7 +59,7 @@ export default function RestaurentStatus() {
       <button
         onClick={handleClick}
         type="button"
-        class={statusButton}
+        className={statusButton}
       >
         <strong>Restaurent {online}</strong>
       </button>

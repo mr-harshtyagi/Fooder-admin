@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Dish from "./Dish";
-import Order from "./Order"
-import Navbar from "./Navbar";
+import Dish from "../components/Dish";
+import Order from "../components/Order"
+import Navbar from "../components/Navbar";
+import axios from "axios";
 
 export default function Restaurent() {
   let params = useParams();
   const [buttonClicked, setButtonClicked] =useState(false);
+   const [dishes, setDishes] = useState([]);
+   useEffect(() => {
+     axios
+       .get(`http://localhost:5000/getrestaurentdetails/${params.restaurentId}`)
+       .then(function (response) {
+         setDishes(response.data.dish);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+   }, []);
 
   function handleDishes(){
       setButtonClicked(true);
@@ -57,14 +69,18 @@ export default function Restaurent() {
       </div>
 
       {buttonClicked ? (
-        <>
-          <Dish />
-          <Dish />
-          <Dish />
-          <Dish />
-          <Dish />
-        </>
-      ) : (
+       dishes.map(dish => {
+         return(
+         <Dish
+           key={dish.id}
+           name ={dish.name}
+           price={dish.price}
+           img={dish.img}
+
+         />)
+
+       }))
+       : (
         <>
           <Order />
           <Order />

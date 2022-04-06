@@ -1,4 +1,16 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Navbar() {
+  let navigate= useNavigate();
+  const [restaurentName , setRestaurentName] = useState("Restaurent Z");
+  const [button, setButton] = useState("btn btn-success");
+  const [status, setStatus] = useState("ONLINE");
+  function handleClick(){
+    setButton("btn btn-danger");
+    setStatus("OFFLINE")
+     navigate("/")
+  }
   return (
     <div style={{ marginBottom: "100px" }}>
       <nav className="navbar fixed-top navbar-light bg-dark">
@@ -24,8 +36,17 @@ export default function Navbar() {
               {" "}
               Fooder{" "}
             </h1>
-            
           </a>
+          <h2
+            style={{
+              display: "inline",
+              color: "white",
+            }}
+          >
+            {restaurentName}
+          </h2>
+         <button onClick={handleClick}
+         className={button}>Status : {status}</button>
         </div>
       </nav>
     </div>
