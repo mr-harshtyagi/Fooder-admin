@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Dish from "../components/Dish";
 import Order from "../components/Order"
 import Navbar from "../components/Navbar";
+import NavbarContext from "../navbarcontext";
 import axios from "axios";
 
 export default function Restaurent() {
   let params = useParams();
+  const { showButton, showRestaurentName } =useContext(NavbarContext);
   const [buttonClicked, setButtonClicked] =useState(false);
    const [dishes, setDishes] = useState([]);
    useEffect(() => {
      axios
        .get(`http://localhost:5000/getrestaurentdetails/${params.restaurentId}`)
        .then(function (response) {
-         setDishes(response.data.dish);
+         setDishes(response.data.dish); // loading all dishes
+         showButton(response.data.status)
+         showRestaurentName(response.data.name)
+         // show data in navbar 
        })
        .catch(function (error) {
          console.log(error);

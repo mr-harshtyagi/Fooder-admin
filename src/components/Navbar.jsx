@@ -1,16 +1,33 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useContext} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import NavbarContext from "../navbarcontext";
+import axios from "axios";
 
 export default function Navbar() {
   let navigate= useNavigate();
-  const [restaurentName , setRestaurentName] = useState("Restaurent Z");
-  const [button, setButton] = useState("btn btn-success");
-  const [status, setStatus] = useState("ONLINE");
+  let params = useParams();
+  const { hideButton,rName,button, status, showButton ,showRestaurentName} = useContext(NavbarContext);
+
   function handleClick(){
-    setButton("btn btn-danger");
-    setStatus("OFFLINE")
-     navigate("/")
-  }
+     showButton(false)
+     axios
+         .patch(`http://localhost:5000/restaurent/${params.restaurentId}`, {
+           status: false,
+         })
+         .then(function (response) {
+          if(response.status === 200)
+          {
+            setTimeout(()=>{
+            navigate("/")
+            showRestaurentName("")
+            hideButton();}, 1000)
+          }   
+         })
+         .catch(function (error) {
+           console.log(error);
+         });
+   }
+
   return (
     <div style={{ marginBottom: "100px" }}>
       <nav className="navbar fixed-top navbar-light bg-dark">
@@ -43,12 +60,13 @@ export default function Navbar() {
               color: "white",
             }}
           >
-            {restaurentName}
+            {rName}
           </h2>
          <button onClick={handleClick}
-         className={button}>Status : {status}</button>
+         className={button}>{status}</button>
         </div>
       </nav>
     </div>
   );
 }
+
