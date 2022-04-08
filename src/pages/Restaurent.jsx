@@ -18,7 +18,6 @@ export default function Restaurent() {
          setDishes(response.data.dish); // loading all dishes
          showButton(response.data.status)
          showRestaurentName(response.data.name)
-         // show data in navbar 
        })
        .catch(function (error) {
          console.log(error);
@@ -36,9 +35,36 @@ export default function Restaurent() {
   return (
     <div>
       <Navbar />
+
+      {buttonClicked ? (
+        dishes.map((dish) => {
+          return (
+            <Dish
+              key={dish.id}
+              name={dish.name}
+              price={dish.price}
+              img={dish.img}
+            />
+          );
+        })
+      ) : (
+        <>
+          <Order />
+          <Order />
+          <Order />
+          <Order />
+          <Order />
+          <Order />
+        </>
+      )}
+      
+      <div style={{height:"50px"}}>
+
+      </div>
+
       <div
-        style={{ marginTop: "-15px", height: "45px" }}
-        className="btn-group w-100"
+        style={{ height: "45px" }}
+        className="btn-group w-100 fixed-bottom bg-light"
         role="group"
         aria-label="Basic radio toggle button group"
       >
@@ -48,11 +74,10 @@ export default function Restaurent() {
           name="btnradio"
           id="btnradio1"
           autoComplete="off"
-          defaultChecked=""
         />
         <label
           onClick={handleDishes}
-          className="btn btn-outline-primary w-50"
+          className="btn btn-outline-dark w-50"
           htmlFor="btnradio1"
         >
           <strong style={{ fontSize: "1.5rem" }}>All Dishes</strong>
@@ -66,35 +91,12 @@ export default function Restaurent() {
         />
         <label
           onClick={handleOrders}
-          className="btn btn-outline-primary w-50"
+          className="btn btn-outline-dark w-50"
           htmlFor="btnradio2"
         >
           <strong style={{ fontSize: "1.5rem" }}>Recent Orders</strong>
         </label>
       </div>
-
-      {buttonClicked ? (
-       dishes.map(dish => {
-         return(
-         <Dish
-           key={dish.id}
-           name ={dish.name}
-           price={dish.price}
-           img={dish.img}
-
-         />)
-
-       }))
-       : (
-        <>
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-        </>
-      )}
     </div>
   );
 }

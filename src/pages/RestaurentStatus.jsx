@@ -15,6 +15,7 @@ export default function RestaurentStatus() {
      "OFFLINE"
    );
    const [restaurentName, setRestaurentName ] = useState("")
+   const [isLoaded, setIsLoaded]=useState(false)
 
    useEffect(()=>{
        axios
@@ -26,7 +27,17 @@ export default function RestaurentStatus() {
               setStausButton("btn btn-lg btn-success");
               setMessage("Your restaurent is Online now.");
               setOnline("ONLINE");
+              setIsLoaded(true)
           }
+         else
+         {
+           setAdminPage("none");
+           setStausButton("btn btn-lg btn-danger");
+           setMessage("Click the button to make Restaurent Online");
+           setOnline("OFFLINE");
+           setIsLoaded(true)
+
+         }
          })
          .catch(function (error) {
            console.log(error);
@@ -53,6 +64,8 @@ export default function RestaurentStatus() {
   return (
     <div style={{ textAlign: "center" }}>
       <Navbar />
+      {isLoaded ? (
+        <>     
       <h1>{restaurentName}</h1>
       <h5 style={{ color: "grey" }}>{message}</h5>
       <br />
@@ -73,6 +86,10 @@ export default function RestaurentStatus() {
       >
         <strong>Go to Admin Page</strong>
       </button>
+      </>):
+      (
+        <h1>Loading ...</h1>
+      )}
     </div>
   );
 }
