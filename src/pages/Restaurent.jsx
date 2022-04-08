@@ -18,7 +18,6 @@ export default function Restaurent() {
          setDishes(response.data.dish); // loading all dishes
          showButton(response.data.status)
          showRestaurentName(response.data.name)
-         // show data in navbar 
        })
        .catch(function (error) {
          console.log(error);
@@ -98,3 +97,6 @@ export default function Restaurent() {
     </div>
   );
 }
+
+
+// This was my change before moving it to bottom and pulling it to my folder
