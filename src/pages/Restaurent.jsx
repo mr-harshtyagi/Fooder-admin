@@ -102,4 +102,3 @@ export default function Restaurent() {
 }
 
 
-// This was my change before moving it to bottom and pulling it to my folder
