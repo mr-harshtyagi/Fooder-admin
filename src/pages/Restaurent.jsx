@@ -13,11 +13,13 @@ export default function Restaurent() {
    const [dishes, setDishes] = useState([]);
    useEffect(() => {
      axios
-       .get(`http://localhost:5000/getrestaurentdetails/${params.restaurentId}`)
+       .get(
+         `https://fooder-app-server.herokuapp.com/getrestaurentdetails/${params.restaurentId}`
+       )
        .then(function (response) {
          setDishes(response.data.dish); // loading all dishes
-         showButton(response.data.status)
-         showRestaurentName(response.data.name)
+         showButton(response.data.status);
+         showRestaurentName(response.data.name);
        })
        .catch(function (error) {
          console.log(error);

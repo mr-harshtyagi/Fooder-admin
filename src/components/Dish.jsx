@@ -11,23 +11,20 @@ export default function Dish(props){
 
   useEffect(()=>{
     axios
-      .get(`http://localhost:5000/dishstatus/${props.id}`)
+      .get(`https://fooder-app-server.herokuapp.com/dishstatus/${props.id}`)
       .then((response) => {
-        if(response.data ){
-          setCheckValue(true)
+        if (response.data) {
+          setCheckValue(true);
           setChecked("checked");
-          setStatus("In Stock")
-          setColor("green")
-          setIsLoaded(true)
-
-        }
-        else{
+          setStatus("In Stock");
+          setColor("green");
+          setIsLoaded(true);
+        } else {
           setCheckValue(false);
           setChecked("");
           setStatus("Out of Stock");
           setColor("red");
           setIsLoaded(true);
-
         }
       })
       .catch(function (error) {
@@ -38,7 +35,7 @@ export default function Dish(props){
   function handleClick(event){
     if(event.target.value === "false") {
       axios
-        .patch(`http://localhost:5000/dish/${props.id}`, {
+        .patch(`https://fooder-app-server.herokuapp.com/dish/${props.id}`, {
           status: true,
         })
         .then(function (response) {
@@ -55,7 +52,7 @@ export default function Dish(props){
     }
     if (event.target.value === "true") {
       axios
-        .patch(`http://localhost:5000/dish/${props.id}`, {
+        .patch(`https://fooder-app-server.herokuapp.com/dish/${props.id}`, {
           status: false,
         })
         .then(function (response) {

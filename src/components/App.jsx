@@ -13,12 +13,10 @@ export default function App(){
      }
      function handleClick(){
        axios
-         .get(`http://localhost:5000/${restaurentId}`)
+         .get(`https://fooder-app-server.herokuapp.com/${restaurentId}`)
          .then(function (response) {
-           if(!response.data)
-            setInvalid("");
-            else
-            navigate(`/status/${restaurentId}`);
+           if (!response.data) setInvalid("");
+           else navigate(`/status/${restaurentId}`);
          })
          .catch(function (error) {
            console.log(error);

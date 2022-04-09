@@ -19,25 +19,24 @@ export default function RestaurentStatus() {
 
    useEffect(()=>{
        axios
-         .get(`http://localhost:5000/getrestaurentdetails/${params.restaurentId}`)
+         .get(
+           `https://fooder-app-server.herokuapp.com/getrestaurentdetails/${params.restaurentId}`
+         )
          .then(function (response) {
-          setRestaurentName(response.data.name)
-          if(response.data.status){
-              setAdminPage("");
-              setStausButton("btn btn-lg btn-success");
-              setMessage("Your restaurent is Online now.");
-              setOnline("ONLINE");
-              setIsLoaded(true)
-          }
-         else
-         {
-           setAdminPage("none");
-           setStausButton("btn btn-lg btn-danger");
-           setMessage("Click the button to make Restaurent Online");
-           setOnline("OFFLINE");
-           setIsLoaded(true)
-
-         }
+           setRestaurentName(response.data.name);
+           if (response.data.status) {
+             setAdminPage("");
+             setStausButton("btn btn-lg btn-success");
+             setMessage("Your restaurent is Online now.");
+             setOnline("ONLINE");
+             setIsLoaded(true);
+           } else {
+             setAdminPage("none");
+             setStausButton("btn btn-lg btn-danger");
+             setMessage("Click the button to make Restaurent Online");
+             setOnline("OFFLINE");
+             setIsLoaded(true);
+           }
          })
          .catch(function (error) {
            console.log(error);
@@ -48,13 +47,14 @@ export default function RestaurentStatus() {
 
    function handleClick(){
        axios
-         .patch(`http://localhost:5000/restaurent/${params.restaurentId}`, {
-           status: true,
-         })
+         .patch(
+           `https://fooder-app-server.herokuapp.com/restaurent/${params.restaurentId}`,
+           {
+             status: true,
+           }
+         )
          .then(function (response) {
-          if(response.status === 200)
-           window.location.reload();
-             
+           if (response.status === 200) window.location.reload();
          })
          .catch(function (error) {
            console.log(error);

@@ -11,21 +11,24 @@ export default function Navbar() {
   function handleClick(){
      showButton(false)
      axios
-         .patch(`http://localhost:5000/restaurent/${params.restaurentId}`, {
+       .patch(
+         `https://fooder-app-server.herokuapp.com/restaurent/${params.restaurentId}`,
+         {
            status: false,
-         })
-         .then(function (response) {
-          if(response.status === 200)
-          {
-            setTimeout(()=>{
-            navigate("/")
-            showRestaurentName("")
-            hideButton();}, 1000)
-          }   
-         })
-         .catch(function (error) {
-           console.log(error);
-         });
+         }
+       )
+       .then(function (response) {
+         if (response.status === 200) {
+           setTimeout(() => {
+             navigate("/");
+             showRestaurentName("");
+             hideButton();
+           }, 1000);
+         }
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
    }
 
   return (
