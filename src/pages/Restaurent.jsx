@@ -41,6 +41,7 @@ export default function Restaurent() {
           return (
             <Dish
               key={dish.id}
+              id={dish.id}
               name={dish.name}
               price={dish.price}
               img={dish.img}
