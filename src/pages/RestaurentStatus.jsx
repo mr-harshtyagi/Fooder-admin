@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export default function RestaurentStatus() {
   let params = useParams();
@@ -65,30 +66,28 @@ export default function RestaurentStatus() {
     <div style={{ textAlign: "center" }}>
       <Navbar />
       {isLoaded ? (
-        <>     
-      <h1>{restaurentName}</h1>
-      <h5 style={{ color: "grey" }}>{message}</h5>
-      <br />
-      <button
-        onClick={handleClick}
-        type="button"
-        className={statusButton}
-      >
-        <strong>Restaurent {online}</strong>
-      </button>
-      <br />
-      <br />
-      <br />
-      <button
-        style={{ display: adminPage, borderRadius: "20px" }}
-        className="btn btn-primary"
-        onClick={() => navigate(`/online/${params.restaurentId}`)}
-      >
-        <strong>Go to Admin Page</strong>
-      </button>
-      </>):
-      (
-        <h1>Loading ...</h1>
+        <>
+          <h1>{restaurentName}</h1>
+          <h5 style={{ color: "grey" }}>{message}</h5>
+          <br />
+          <button onClick={handleClick} type="button" className={statusButton}>
+            <strong>Restaurent {online}</strong>
+          </button>
+          <br />
+          <br />
+          <br />
+          <button
+            style={{ display: adminPage, borderRadius: "20px" }}
+            className="btn btn-primary"
+            onClick={() => navigate(`/online/${params.restaurentId}`)}
+          >
+            <strong>Go to Admin Page</strong>
+          </button>
+        </>
+      ) : (
+        <div className="text-center mt-5">
+          <BeatLoader color={"#444645"} size={15} />
+        </div>
       )}
     </div>
   );

@@ -10,7 +10,7 @@ export default function Restaurent() {
   let params = useParams();
   const { showButton, showRestaurentName } =useContext(NavbarContext);
   const [buttonClicked, setButtonClicked] =useState(false);
-   const [dishes, setDishes] = useState([]);
+  const [dishes, setDishes] = useState([]);
    useEffect(() => {
      axios
        .get(
@@ -60,13 +60,14 @@ export default function Restaurent() {
           <Order />
         </>
       )}
-      
-      <div style={{height:"50px"}}>
 
-      </div>
+      <div style={{ height: "50px" }}></div>
 
       <div
-        style={{ height: "45px" }}
+        style={{
+          height: "45px",
+          boxShadow: "0px -1px 8px 0px rgba(0,0,0,0.63)",
+        }}
         className="btn-group w-100 fixed-bottom bg-light"
         role="group"
         aria-label="Basic radio toggle button group"
@@ -79,6 +80,7 @@ export default function Restaurent() {
           autoComplete="off"
         />
         <label
+          style={{ borderColor: "white" }}
           onClick={handleDishes}
           className="btn btn-outline-dark w-50"
           htmlFor="btnradio1"
@@ -93,6 +95,7 @@ export default function Restaurent() {
           autoComplete="off"
         />
         <label
+          style={{ borderColor: "white" }}
           onClick={handleOrders}
           className="btn btn-outline-dark w-50"
           htmlFor="btnradio2"

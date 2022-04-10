@@ -47,7 +47,7 @@ export default function Order() {
         <div style={{ float: "right", textAlign: "center" }}>
           <button
             onClick={() =>
-              setAcceptOrderButtonState("btn btn-outline-success disabled")
+              setAcceptOrderButtonState("btn btn-success disabled")
             }
             className={acceptOrderButtonState}
           >
@@ -57,7 +57,7 @@ export default function Order() {
           <br /> <br />
           <button
             onClick={() =>
-              setCompletedButtonState("btn btn-outline-success disabled")
+              setCompletedButtonState("btn btn-success disabled")
             }
             className={completedButtonState}
           >

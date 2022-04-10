@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BeatLoader from "react-spinners/BeatLoader"
 
 export default function Dish(props){
   const [checkValue, setCheckValue]= useState(false);
@@ -126,7 +127,9 @@ export default function Dish(props){
             </div>
           </div>
         ) : (
-          <h1> Loading...</h1>
+          <div className="text-center mt-5">
+            <BeatLoader color={"#444645"} size={15} />
+          </div>
         )}
       </div>
     );
