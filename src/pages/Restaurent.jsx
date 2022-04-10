@@ -35,8 +35,6 @@ export default function Restaurent() {
           .catch(function (error) {
             console.log(error);
           });
-
-
    }, []);
 
   function handleDishes(){
