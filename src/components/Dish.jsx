@@ -8,7 +8,6 @@ export default function Dish(props){
   const [status, setStatus] = useState("");
   const [color, setColor] = useState("");
   const [isLoaded ,setIsLoaded] =useState(false)
-   
 
   useEffect(()=>{
     axios
@@ -31,8 +30,8 @@ export default function Dish(props){
       .catch(function (error) {
         console.log(error);
       });
-
   },[])
+  
   function handleClick(event){
     if(event.target.value === "false") {
       axios

@@ -1,6 +1,6 @@
 // Design and code later
 import { useState } from "react";
-export default function Order() {
+export default function Order(props) {
   const [payStatus,setPayStatus] = useState("Not Paid");
   const [acceptOrderButtonState, setAcceptOrderButtonState] = useState(
     "btn btn-outline-success"
@@ -28,7 +28,7 @@ export default function Order() {
           {payStatus}
         </h2>
         <h3 style={{ fontWeight: "700", color: "grey" }}>
-          Order #1000001{" "}
+          Order #{props.id}
           <h6 style={{ fontSize: "1.2rem", display: "inline", color: "black" }}>
             <strong
               style={{
@@ -39,11 +39,11 @@ export default function Order() {
               }}
             >
               {" "}
-              Total : {"₹ "} 100{" "}
+              Total : {"₹ "} {props.total}
             </strong>
           </h6>
         </h3>
-        <h2>Harsh Tyagi</h2>
+        <h2>{props.name}</h2>
         <div style={{ float: "right", textAlign: "center" }}>
           <button
             onClick={() =>
@@ -79,10 +79,11 @@ export default function Order() {
           </span>
         </h5>
         <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
+        {props.items.map(item => {
+          return (
+          <li>{item.name}</li>
+          )
+        })}
         </ul>
 
         <hr />

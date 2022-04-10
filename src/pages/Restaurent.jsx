@@ -11,6 +11,7 @@ export default function Restaurent() {
   const { showButton, showRestaurentName } =useContext(NavbarContext);
   const [buttonClicked, setButtonClicked] =useState(false);
   const [dishes, setDishes] = useState([]);
+  const [orders, setOrders] = useState([]);
    useEffect(() => {
      axios
        .get(
@@ -24,6 +25,18 @@ export default function Restaurent() {
        .catch(function (error) {
          console.log(error);
        });
+        axios
+          .get(
+            `https://fooder-app-server.herokuapp.com/getordersdetails/${params.restaurentId}`
+          )
+          .then(function (response) {
+            setOrders(response.data); // loading all orders
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+
    }, []);
 
   function handleDishes(){
@@ -52,12 +65,19 @@ export default function Restaurent() {
         })
       ) : (
         <>
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
+       {orders.map((order) => {
+          return (
+            <Order
+              key={order.order_id}
+              id={order.order_id}
+              name={order.customer_name}
+              total={order.order_total}
+              items={order.order_items}
+      
+            />
+          );
+        })}
+         
         </>
       )}
 
