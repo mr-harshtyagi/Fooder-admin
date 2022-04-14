@@ -63,19 +63,17 @@ export default function Restaurent() {
         })
       ) : (
         <>
-       {orders.map((order) => {
-          return (
-            <Order
-              key={order.order_id}
-              id={order.order_id}
-              name={order.customer_name}
-              total={order.order_total}
-              items={order.order_items}
-      
-            />
-          );
-        })}
-         
+          {orders.map((order) => {
+            return (
+              <Order
+                key={order.order_id}
+                id={order.order_id}
+                name={order.customer_name}
+                total={order.order_total}
+                items={order.order_items}
+              />
+            );
+          })}
         </>
       )}
 
@@ -84,7 +82,8 @@ export default function Restaurent() {
       <div
         style={{
           height: "45px",
-          boxShadow: "0px -1px 8px 0px rgba(0,0,0,0.63)",
+          boxShadow:
+            "0px -1px 8px 0px rgba(0,0,0,0.25)",
         }}
         className="btn-group w-100 fixed-bottom bg-light"
         role="group"
