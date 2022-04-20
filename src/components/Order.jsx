@@ -1,11 +1,43 @@
 // Design and code later
 import { useState } from "react";
+import axios from "axios";
+
 export default function Order(props) {
   const [payStatus,setPayStatus] = useState("Not Paid");
-  const [acceptOrderButtonState, setAcceptOrderButtonState] = useState(
-    "btn btn-outline-success"
-  );
+  const [acceptOrderButtonState, setAcceptOrderButtonState] = useState("btn btn-outline-success");
   const [completedButtonState, setCompletedButtonState] = useState("btn btn-outline-success");
+
+  function handleAcceptOrderClick(){
+    setAcceptOrderButtonState("btn btn-success disabled");
+     axios
+       .patch(
+         `https://fooder-app-server.herokuapp.com/acceptedstatus/${props.id}`,{})
+       .then(function (response) {
+         if (response.status === 200);
+         console.log(response.data);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+  }
+
+  function handleCompleteOrderClick() {
+    setCompletedButtonState("btn btn-success disabled");
+    axios
+      .patch(
+        `https://fooder-app-server.herokuapp.com/completedstatus/${props.id}`,
+        {}
+      )
+      .then(function (response) {
+        if (response.status === 200);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   return (
     <div>
       <div
@@ -46,9 +78,7 @@ export default function Order(props) {
         <h2>{props.name}</h2>
         <div style={{ float: "right", textAlign: "center" }}>
           <button
-            onClick={() =>
-              setAcceptOrderButtonState("btn btn-success disabled")
-            }
+            onClick={handleAcceptOrderClick}
             className={acceptOrderButtonState}
           >
             {" "}
@@ -56,9 +86,7 @@ export default function Order(props) {
           </button>
           <br /> <br />
           <button
-            onClick={() =>
-              setCompletedButtonState("btn btn-success disabled")
-            }
+            onClick={handleCompleteOrderClick }
             className={completedButtonState}
           >
             {" "}
