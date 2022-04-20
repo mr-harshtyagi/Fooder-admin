@@ -63,17 +63,17 @@ export default function Restaurent() {
         })
       ) : (
         <>
-          {orders.map((order) => {
-            return (
-              <Order
+          {orders.map(
+            (order) => 
+            !order.order_completed && (
+            <Order
                 key={order.order_id}
                 id={order.order_id}
                 name={order.customer_name}
                 total={order.order_total}
                 items={order.order_items}
-              />
-            );
-          })}
+              />)
+          )}
         </>
       )}
 

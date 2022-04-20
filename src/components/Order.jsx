@@ -22,7 +22,8 @@ export default function Order(props) {
   }
 
   function handleCompleteOrderClick() {
-    setCompletedButtonState("btn btn-success disabled");
+    if (acceptOrderButtonState === "btn btn-success disabled"){
+      setCompletedButtonState("btn btn-success disabled");
     axios
       .patch(
         `https://fooder-app-server.herokuapp.com/completedstatus/${props.id}`,
@@ -31,10 +32,15 @@ export default function Order(props) {
       .then(function (response) {
         if (response.status === 200);
         console.log(response.data);
+        window.location.reload(); // instead if i can call useEffect hook that will be better
       })
       .catch(function (error) {
         console.log(error);
       });
+    }
+    else{
+      // show a message PLEASE ACCEPT ORDER FIRST
+    }
   }
 
 
