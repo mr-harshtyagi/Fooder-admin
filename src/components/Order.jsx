@@ -119,8 +119,7 @@ export default function Order(props) {
           )
         })}
         </ul>
-
-        <hr />
+        <hr style={{marginTop:"80px"}} />
       </div>
     </div>
   );
