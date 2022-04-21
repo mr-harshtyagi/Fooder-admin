@@ -3,12 +3,21 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Order(props) {
-  const [payStatus,setPayStatus] = useState("Not Paid");
-  const [acceptOrderButtonState, setAcceptOrderButtonState] = useState("btn btn-outline-success");
-  const [completedButtonState, setCompletedButtonState] = useState("btn btn-outline-success");
+  let accept_status = "btn btn-outline-success";
+  let reject_status = "btn btn-outline-danger";
+  if(props.accept_status === true){
+    accept_status = "btn btn-success disabled";
+    reject_status = "btn btn-outline-danger disabled";
 
+  }
+  const [payStatus,setPayStatus] = useState("Not Paid");
+  const [acceptOrderButtonState, setAcceptOrderButtonState] = useState(accept_status);
+  const [rejectOrderButtonState, setRejectOrderButtonState] = useState(reject_status);
+  const [completedButtonState, setCompletedButtonState] = useState("btn btn-outline-success");
+ 
   function handleAcceptOrderClick(){
     setAcceptOrderButtonState("btn btn-success disabled");
+    setRejectOrderButtonState("btn btn-outline-danger disabled");
      axios
        .patch(
          `https://fooder-app-server.herokuapp.com/acceptedstatus/${props.id}`,{})
@@ -19,6 +28,37 @@ export default function Order(props) {
        .catch(function (error) {
          console.log(error);
        });
+  }
+  function handleRejectOrderClick() {
+    setRejectOrderButtonState("btn btn-danger disabled");
+    setAcceptOrderButtonState("btn btn-outline-success disabled");
+    setCompletedButtonState("btn btn-outline-success disabled");
+    axios
+      .patch(
+        `https://fooder-app-server.herokuapp.com/rejectedstatus/${props.id}`,
+        {}
+      )
+      .then(function (response) {
+        if (response.status === 200);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+       axios
+      .patch(
+        `https://fooder-app-server.herokuapp.com/completedstatus/${props.id}`,
+        {}
+      )
+      .then(function (response) {
+        if (response.status === 200);
+        console.log(response.data);
+        window.location.reload(); // instead if i can call useEffect hook that will be better
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   function handleCompleteOrderClick() {
@@ -86,13 +126,21 @@ export default function Order(props) {
           <button
             onClick={handleAcceptOrderClick}
             className={acceptOrderButtonState}
+            style={{ marginRight: "10px" }}
           >
             {" "}
-            <strong>ACCEPT ORDER</strong>{" "}
+            <strong>ACCEPT</strong>{" "}
+          </button>
+          <button
+            onClick={handleRejectOrderClick}
+            className={rejectOrderButtonState}
+          >
+            {" "}
+            <strong>REJECT</strong>{" "}
           </button>
           <br /> <br />
           <button
-            onClick={handleCompleteOrderClick }
+            onClick={handleCompleteOrderClick}
             className={completedButtonState}
           >
             {" "}
@@ -113,13 +161,11 @@ export default function Order(props) {
           </span>
         </h5>
         <ul>
-        {props.items.map(item => {
-          return (
-          <li>{item.name}</li>
-          )
-        })}
+          {props.items.map((item) => {
+            return <li>{item.name}</li>;
+          })}
         </ul>
-        <hr style={{marginTop:"80px"}} />
+        <hr style={{ marginTop: "80px" }} />
       </div>
     </div>
   );

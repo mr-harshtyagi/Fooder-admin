@@ -64,15 +64,17 @@ export default function Restaurent() {
       ) : (
         <>
           {orders.map(
-            (order) => 
-            !order.order_completed && (
-            <Order
-                key={order.order_id}
-                id={order.order_id}
-                name={order.customer_name}
-                total={order.order_total}
-                items={order.order_items}
-              />)
+            (order) =>
+              !order.order_completed && (
+                <Order
+                  key={order.order_id}
+                  id={order.order_id}
+                  name={order.customer_name}
+                  total={order.order_total}
+                  items={order.order_items}
+                  accept_status={order.order_accepted}
+                />
+              )
           )}
         </>
       )}
@@ -82,8 +84,7 @@ export default function Restaurent() {
       <div
         style={{
           height: "45px",
-          boxShadow:
-            "0px -1px 8px 0px rgba(0,0,0,0.25)",
+          boxShadow: "0px -1px 8px 0px rgba(0,0,0,0.25)",
         }}
         className="btn-group w-100 fixed-bottom bg-light"
         role="group"
