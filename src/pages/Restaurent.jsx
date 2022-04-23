@@ -70,6 +70,7 @@ export default function Restaurent() {
                   key={order.order_id}
                   id={order.order_id}
                   name={order.customer_name}
+                  time={order.time}
                   total={order.order_total}
                   items={order.order_items}
                   accept_status={order.order_accepted}
