@@ -93,7 +93,7 @@ export default function Dish(props){
                   ></img>
                 </Col>
                 <Col xs={4} lg={8}>
-                  <div style={{ marginTop: "20px" }}>
+                  <div style={{ marginTop: "9px" }}>
                     <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
 
                     <h6 style={{ fontSize: "1.2rem", color: "grey" }}>
