@@ -5,11 +5,12 @@ import Order from "../components/Order"
 import NavbarContext from "../navbarcontext";
 import axios from "axios";
 import Navbar2 from "../components/Navbar2";
+import Appbar from "../components/appbar";
 
 export default function Restaurent() {
   let params = useParams();
   const { showButton, showRestaurentName } =useContext(NavbarContext);
-  const [buttonClicked, setButtonClicked] =useState(false);
+  const [buttonClicked, setButtonClicked] =useState(true);
   const [dishes, setDishes] = useState([]);
   const [orders, setOrders] = useState([]);
    useEffect(() => {
@@ -82,7 +83,7 @@ export default function Restaurent() {
 
       <div style={{ height: "50px" }}></div>
 
-      <div
+      {/* <div
         style={{
           height: "45px",
           boxShadow: "0px -1px 8px 0px rgba(0,0,0,0.25)",
@@ -121,7 +122,11 @@ export default function Restaurent() {
         >
           <strong style={{ fontSize: "1.5rem" }}>Recent Orders</strong>
         </label>
-      </div>
+      </div> */}
+      <Appbar
+        dishes={handleDishes}
+        orders={handleOrders}
+      />
     </div>
   );
 }

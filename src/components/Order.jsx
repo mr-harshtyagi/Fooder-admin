@@ -88,10 +88,8 @@ export default function Order(props) {
     <div>
       <div
         style={{
-          padding: "5px",
+          padding: "10px",
           backgroundColor: "white",
-          margin: "20px",
-          borderRadius: "20px",
         }}
       >
         <h2
@@ -106,20 +104,24 @@ export default function Order(props) {
           {payStatus}
         </h2>
         <h3 style={{ fontWeight: "700", color: "grey" }}>
-          Order #{props.id}{"  "}
-          <h6 style={{ fontSize: "1.2rem", display: "inline", color: "black" }}>
-            <strong
-              style={{
-                paddingLeft: "7px",
-                paddingRight: "7px",
-                backgroundColor: "#61A4BC",
-                borderRadius: "5px",
-              }}
-            >Total : {"₹ "} {props.total}
-            </strong>
-          </h6>
+          Order ID #{props.id}
+          {"  "}
         </h3>
-        <p style={{ fontWeight: "500", color: "grey" }}>Order Time : {new Date(props.time).toLocaleTimeString()}</p>
+        <h6 style={{ fontSize: "1.2rem", display: "inline", color: "black" }}>
+          <strong
+            style={{
+              paddingLeft: "7px",
+              paddingRight: "7px",
+              backgroundColor: "#B6FFCE",
+              borderRadius: "5px",
+            }}
+          >
+            Order Total : {"₹ "} {props.total}
+          </strong>
+        </h6>
+        <p style={{ fontWeight: "400", color: "grey" }}>
+          Order Time : {new Date(props.time).toLocaleTimeString()}
+        </p>
         <h2>{props.name}</h2>
         <div style={{ float: "right", textAlign: "center" }}>
           <button
@@ -151,7 +153,7 @@ export default function Order(props) {
             style={{
               paddingLeft: "7px",
               paddingRight: "7px",
-              backgroundColor: "#20c997",
+              backgroundColor: "#FFEEEE",
               borderRadius: "5px",
             }}
           >

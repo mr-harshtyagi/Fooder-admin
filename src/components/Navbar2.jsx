@@ -32,7 +32,7 @@ export default function Navbar2() {
    }
 
   return (
-    <div style={{ marginBottom: "50px" }}>
+    <div style={{ marginBottom: "80px" }}>
       <nav
         style={{
           boxShadow: "0px 0px 8px 0px rgba(0,0,0,1)",
