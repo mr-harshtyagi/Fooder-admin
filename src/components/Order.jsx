@@ -88,7 +88,8 @@ export default function Order(props) {
     <div>
       <div
         style={{
-          padding: "10px",
+          paddingLeft:"20px",
+          paddingRight:"20px",
           backgroundColor: "white",
         }}
       >

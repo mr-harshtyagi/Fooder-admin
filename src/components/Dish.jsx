@@ -92,7 +92,7 @@ export default function Dish(props){
                     alt="dish-img"
                   ></img>
                 </Col>
-                <Col xs={5} lg={8}>
+                <Col xs={4} lg={8}>
                   <div style={{ marginTop: "20px" }}>
                     <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
 
@@ -101,7 +101,7 @@ export default function Dish(props){
                     </h6>
                   </div>
                 </Col>
-                <Col xs={3} lg={2}>
+                <Col xs={4} lg={2}>
                   <div
                     className="form-check form-switch"
                     style={{
