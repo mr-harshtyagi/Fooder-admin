@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Restaurent from './pages/Restaurent';
 import RestaurentStatus from './pages/RestaurentStatus';
 import { NavbarProvider } from './navbarcontext';

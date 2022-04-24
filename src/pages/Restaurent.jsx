@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Dish from "../components/Dish";
 import Order from "../components/Order"
-import Navbar from "../components/Navbar";
 import NavbarContext from "../navbarcontext";
 import axios from "axios";
+import Navbar2 from "../components/Navbar2";
 
 export default function Restaurent() {
   let params = useParams();
@@ -47,7 +47,7 @@ export default function Restaurent() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar2 />
 
       {buttonClicked ? (
         dishes.map((dish) => {
