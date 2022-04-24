@@ -107,16 +107,15 @@ export default function Order(props) {
           Order ID #{props.id}
           {"  "}
         </h3>
-        <h6 style={{ fontSize: "1.2rem", display: "inline", color: "black" }}>
+        <h6 style={{ fontSize: "1.3rem", display: "inline", color: "black" }}>
           <strong
             style={{
-              paddingLeft: "7px",
+              paddingLeft: "3px",
               paddingRight: "7px",
               backgroundColor: "#B6FFCE",
               borderRadius: "5px",
             }}
-          >
-            Order Total : {"₹ "} {props.total}
+          >Order Total : {"₹ "} {props.total}
           </strong>
         </h6>
         <p style={{ fontWeight: "400", color: "grey" }}>

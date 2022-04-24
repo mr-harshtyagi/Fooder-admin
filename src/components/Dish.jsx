@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader"
+import {Container, Row,Col } from "react-bootstrap";
 
 export default function Dish(props){
   const [checkValue, setCheckValue]= useState(false);
@@ -73,57 +74,63 @@ export default function Dish(props){
           <div
             style={{
               textAlign: "left",
-              padding: "30px",
+              marginBottom:"15px"
             }}
           >
-            <img
-              style={{
-                float: "left",
-                height: "100px",
-                width: "100px",
-                borderRadius: "5px",
-                marginRight: "20px",
-              }}
-              src={"../" + props.img}
-              alt="dish-img"
-            ></img>
+            <Container>
+              <Row>
+                <Col xs={4} lg={2}>
+                  <img
+                    style={{
+                      float: "left",
+                      height: "100px",
+                      width: "100px",
+                      borderRadius: "5px",
+                      marginRight: "10px",
+                    }}
+                    src={"../" + props.img}
+                    alt="dish-img"
+                  ></img>
+                </Col>
+                <Col xs={5} lg={8}>
+                  <div style={{ marginTop: "20px" }}>
+                    <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
 
-            <div
-              className="form-check form-switch"
-              style={{
-                marginTop: "30px",
-                marginRight: "60px",
-                float: "right",
-              }}
-            >
-              <input
-                onClick={handleClick}
-                className="form-check-input"
-                type="checkbox"
-                role="switch"
-                value={checkValue}
-                defaultChecked={checked}
-              />
-            </div>
-
-            <h6
-              style={{
-                float: "right",
-                marginTop: "60px",
-                marginRight: "-47px",
-                color: color,
-              }}
-            >
-              <strong>{status}</strong>
-            </h6>
-
-            <div style={{ marginTop: "20px" }}>
-              <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
-
-              <h6 style={{ fontSize: "1.2rem", color: "grey" }}>
-                {"₹ "} {props.price}
-              </h6>
-            </div>
+                    <h6 style={{ fontSize: "1.2rem", color: "grey" }}>
+                      {"₹ "} {props.price}
+                    </h6>
+                  </div>
+                </Col>
+                <Col xs={3} lg={2}>
+                  <div
+                    className="form-check form-switch"
+                    style={{
+                      marginTop: "30px",
+                      float: "right",
+                    }}
+                  >
+                    <input
+                      onClick={handleClick}
+                      className="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      value={checkValue}
+                      defaultChecked={checked}
+                    />
+                  </div>
+                  <h6
+                    style={{
+                      float: "right",
+                      marginTop: "60px",
+                      marginRight: "-47px",
+                      color: color,
+                    }}
+                  >
+                    <strong>{status}</strong>
+                  </h6>
+                </Col>
+              </Row>
+            </Container>
           </div>
         ) : (
           <div className="text-center mt-5">
