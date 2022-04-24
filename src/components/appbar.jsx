@@ -16,7 +16,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function Appbar(prop) {
+export default function Appbar(props) {
     const [value,setValue]=useState(0);
   return (
     <Box style={{ marginTop: "80px" }}>
@@ -30,10 +30,10 @@ export default function Appbar(prop) {
           onChange={(event, newValue) => {
             setValue(newValue);
             if (newValue === 0) {
-              prop.dishes();
+              props.dishes();
             }
             if (newValue === 1) {
-              prop.orders();
+              props.orders();
             }
           }}
         >
@@ -41,7 +41,7 @@ export default function Appbar(prop) {
           <BottomNavigationAction
             label="Recent Orders"
             icon={
-              <StyledBadge badgeContent={2} color="success" >
+              <StyledBadge badgeContent={props.count} color="success" >
                 <RestaurantIcon />
               </StyledBadge>
             }

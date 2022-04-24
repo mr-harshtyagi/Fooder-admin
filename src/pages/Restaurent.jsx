@@ -80,52 +80,11 @@ export default function Restaurent() {
           )}
         </>
       )}
-
       <div style={{ height: "50px" }}></div>
-
-      {/* <div
-        style={{
-          height: "45px",
-          boxShadow: "0px -1px 8px 0px rgba(0,0,0,0.25)",
-        }}
-        className="btn-group w-100 fixed-bottom bg-light"
-        role="group"
-        aria-label="Basic radio toggle button group"
-      >
-        <input
-          type="radio"
-          className="btn-check"
-          name="btnradio"
-          id="btnradio1"
-          autoComplete="off"
-        />
-        <label
-          style={{ borderColor: "white" }}
-          onClick={handleDishes}
-          className="btn btn-outline-dark w-50"
-          htmlFor="btnradio1"
-        >
-          <strong style={{ fontSize: "1.5rem" }}>All Dishes</strong>
-        </label>
-        <input
-          type="radio"
-          className="btn-check"
-          name="btnradio"
-          id="btnradio2"
-          autoComplete="off"
-        />
-        <label
-          style={{ borderColor: "white" }}
-          onClick={handleOrders}
-          className="btn btn-outline-dark w-50"
-          htmlFor="btnradio2"
-        >
-          <strong style={{ fontSize: "1.5rem" }}>Recent Orders</strong>
-        </label>
-      </div> */}
       <Appbar
         dishes={handleDishes}
         orders={handleOrders}
+        count={orders.length}
       />
     </div>
   );
