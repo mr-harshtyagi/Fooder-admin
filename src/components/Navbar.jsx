@@ -1,35 +1,5 @@
-import {useContext} from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import NavbarContext from "../navbarcontext";
-import axios from "axios";
 
 export default function Navbar() {
-  let navigate= useNavigate();
-  let params = useParams();
-  const { hideButton,rName,button, status, showButton ,showRestaurentName} = useContext(NavbarContext);
-
-  function handleClick(){
-     showButton(false)
-     axios
-       .patch(
-         `https://fooder-app-server.herokuapp.com/restaurent/${params.restaurentId}`,
-         {
-           status: false,
-         }
-       )
-       .then(function (response) {
-         if (response.status === 200) {
-           setTimeout(() => {
-             navigate("/");
-             showRestaurentName("");
-             hideButton();
-           }, 1000);
-         }
-       })
-       .catch(function (error) {
-         console.log(error);
-       });
-   }
 
   return (
     <div style={{ marginBottom: "100px" }}>
@@ -62,17 +32,6 @@ export default function Navbar() {
               Fooder{" "}
             </h1>
           </a>
-          <h2
-            style={{
-              display: "inline",
-              color: "white",
-            }}
-          >
-            {rName}
-          </h2>
-          <button onClick={handleClick} className={button}>
-            {status}
-          </button>
         </div>
       </nav>
     </div>
