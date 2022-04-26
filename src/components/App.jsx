@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { Col, Container,Row } from "react-bootstrap";
-import { BounceLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 export default function App(){
     let navigate = useNavigate();
     const [restaurentId , setRestaurentId] = useState("");
-    const [isLoaded, setIsLoaded] =useState(true);
+    const [loading, setLoading] =useState(false);
     const [password, setPassword] = useState("");
     const [invalid , setInvalid] = useState("none")
      function handleChange1(event) {
@@ -18,13 +18,15 @@ export default function App(){
        setPassword(event.target.value);
      }
      function handleClick(){
-        setIsLoaded(false);
+        setLoading(true);
        axios
          .get(`https://fooder-app-server.herokuapp.com/${restaurentId}`)
          .then(function (response) {
-           if (!response.data) setInvalid("");
+           if (!response.data) {
+             setInvalid("")
+            setLoading(false)}
            else{ 
-             setIsLoaded(true);
+             setLoading(false);
              navigate(`/status/${restaurentId}`);
 
           };
@@ -38,7 +40,6 @@ export default function App(){
         <Navbar />
 
         <div
-          className="text-center"
           style={{
             paddingTop: "50px",
           }}
@@ -46,57 +47,70 @@ export default function App(){
           <Container>
             <Row>
               <Col xs={1} lg={3} md={3}></Col>
-              {isLoaded ? (
-                <Col xs={10} lg={6} md={6}>
-                  <main className="form-signin">
-                    <form onSubmit={(e) => e.preventDefault()}>
-                      <h1 className="fw-normal">LOGIN</h1>
-                      <br />
-                      <div className="form-floating">
-                        <input
-                          onChange={handleChange1}
-                          type="text"
-                          className="form-control"
-                          id="floatingInput1"
-                          value={restaurentId}
-                        />
-                        <label htmlFor="floatingInput1">Restaurent ID</label>
-                      </div>
-                      <div className="form-floating mt-3">
-                        <input
-                          onChange={handleChange2}
-                          type="password"
-                          className="form-control"
-                          id="floatingInput2"
-                          value={password}
-                        />
-                        <label htmlFor="floatingInput2">Password</label>
-                      </div>
-                      <h6 style={{ color: "red", display: invalid }}>
-                        Invalid credentials!!!
-                      </h6>
-                      <div className="checkbox mb-3 mt-2">
-                        <label>
-                          <input type="checkbox" defaultValue="remember-me" />{" "}
-                          Remember me
-                        </label>
-                      </div>
-                      <button
-                        onClick={handleClick}
-                        className="w-50 btn btn-primary"
-                        type="submit"
+              <Col xs={10} lg={6} md={6}>
+                <main className="form-signin">
+                  <h1 className="fw-normal text-center">LOGIN</h1>
+                  <br />
+                  <form onSubmit={(e) =>{ 
+                    e.preventDefault()
+                    handleClick();
+                  }}>
+                    <div className="col-md-12">
+                      <label
+                        htmlFor="validationDefault01"
+                        className="form-label"
                       >
-                        Login
-                      </button>
-                      <p className="mt-5 mb-3 text-muted">© Fooder</p>
-                    </form>
-                  </main>
-                </Col>
-              ) : (
-                <Col xs={10} lg={6} md={6}>
-                  <BounceLoader color={"#444645"} size={15} />
-                </Col>
-              )}
+                        Restaurent ID
+                      </label>
+                      <input
+                        onChange={handleChange1}
+                        type="text"
+                        className="form-control"
+                        id="validationDefault01"
+                        value={restaurentId}
+                        placeholder="Enter Restaurent ID"
+                        required
+                      />
+                    </div>
+                    <div className="col-md-12 mt-2">
+                      <label
+                        htmlFor="validationDefault02"
+                        className="form-label"
+                      >
+                        Password
+                      </label>
+                      <input
+                        onChange={handleChange2}
+                        type="password"
+                        className="form-control"
+                        id="validationDefault02"
+                        value={password}
+                        placeholder="Enter Password"
+                        required
+                      />
+                    </div>
+                    <h6 style={{ color: "red", display: invalid }}>
+                      Invalid credentials!!!
+                    </h6>
+                    <div className="checkbox mb-3 mt-2 text-center">
+                      <label>
+                        <input type="checkbox" defaultValue="remember-me" />{" "}
+                        Remember me
+                      </label>
+                    </div>
+                    <div className="text-center">
+                      {!loading && (
+                        <button type="submit" className="w-50 btn btn-primary">
+                          Login
+                        </button>
+                      )}
+                      <ClipLoader loading={loading} color={"#444645"} />
+                    </div>
+
+                    <p className="mt-5 mb-3 text-muted text-center">© Fooder</p>
+                  </form>
+                </main>
+              </Col>
 
               <Col xs={1} lg={3} md={3}></Col>
             </Row>
