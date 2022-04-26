@@ -41,7 +41,7 @@ export default function App(){
 
         <div
           style={{
-            paddingTop: "50px",
+            paddingTop: "30px",
           }}
         >
           <Container>
