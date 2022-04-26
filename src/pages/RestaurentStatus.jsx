@@ -43,7 +43,7 @@ export default function RestaurentStatus() {
            console.log(error);
          });
 
-   },[])
+   },[params.restaurentId])
 
 
    function handleClick(){
