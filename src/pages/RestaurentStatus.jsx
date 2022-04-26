@@ -77,8 +77,8 @@ export default function RestaurentStatus() {
           <br />
           <br />
           <button
-            style={{ display: adminPage, borderRadius: "20px" }}
-            className="btn btn-primary"
+            style={{ display: adminPage, borderRadius: "30px" }}
+            className="btn btn-lg btn-primary"
             onClick={() => navigate(`/online/${params.restaurentId}`)}
           >
             <strong>Go to Admin Page</strong>
