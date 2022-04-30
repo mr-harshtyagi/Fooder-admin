@@ -17,12 +17,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function Appbar(props) {
-    const [value,setValue]=useState(0);
+    const [value,setValue]=useState(1);
   return (
     <Box style={{ marginTop: "80px" }}>
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-        elevation={3}
+        elevation={5}
       >
         <BottomNavigation
           showLabels

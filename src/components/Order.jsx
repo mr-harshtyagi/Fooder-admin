@@ -11,6 +11,8 @@ export default function Order(props) {
 
   }
   const [payStatus,setPayStatus] = useState("Not Paid");
+  const [showPopup, setShowPopup] = useState(false);
+
   const [acceptOrderButtonState, setAcceptOrderButtonState] = useState(accept_status);
   const [rejectOrderButtonState, setRejectOrderButtonState] = useState(reject_status);
   const [completedButtonState, setCompletedButtonState] = useState("btn btn-outline-success");
@@ -53,7 +55,7 @@ export default function Order(props) {
       .then(function (response) {
         if (response.status === 200);
         console.log(response.data);
-        window.location.reload(); // instead if i can call useEffect hook that will be better
+         props.refreshOrders();
       })
       .catch(function (error) {
         console.log(error);
@@ -72,7 +74,7 @@ export default function Order(props) {
       .then(function (response) {
         if (response.status === 200);
         console.log(response.data);
-        window.location.reload(); // instead if i can call useEffect hook that will be better
+        props.refreshOrders();
       })
       .catch(function (error) {
         console.log(error);
@@ -80,16 +82,17 @@ export default function Order(props) {
     }
     else{
       // show a message PLEASE ACCEPT ORDER FIRST
+      setShowPopup(true);
+      setTimeout(()=>{setShowPopup(false)}, 500)
     }
   }
-
 
   return (
     <div>
       <div
         style={{
-          paddingLeft:"10px",
-          paddingRight:"10px",
+          paddingLeft: "10px",
+          paddingRight: "10px",
           backgroundColor: "white",
         }}
       >
@@ -116,7 +119,8 @@ export default function Order(props) {
               backgroundColor: "#B6FFCE",
               borderRadius: "5px",
             }}
-          >Order Total : {"₹ "} {props.total}
+          >
+            Order Total : {"₹ "} {props.total}
           </strong>
         </h6>
         <p style={{ fontWeight: "400", color: "grey" }}>
@@ -168,6 +172,25 @@ export default function Order(props) {
         </ul>
         <hr style={{ marginTop: "80px" }} />
       </div>
+      {showPopup && (
+        <div style={{ paddingLeft: "25%", paddingRight: "25%" }}>
+          <div
+            style={{
+              position: "absolute",
+              marginTop: "-70px",
+              padding: "5px",
+              backgroundColor: "#FF6B6B",
+              color: "white",
+              width: "50%",
+              fontSize: "1.5rem",
+              textAlign: "center",
+              borderRadius: "20px",
+            }}
+          >
+            <strong>Please Accept this order first.</strong>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

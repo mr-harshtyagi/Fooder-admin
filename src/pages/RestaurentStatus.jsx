@@ -44,9 +44,7 @@ export default function RestaurentStatus() {
          });
 
    },[params.restaurentId])
-
-
-   function handleClick(){
+function handleClick(){
        axios
          .patch(
            `https://fooder-app-server.herokuapp.com/restaurent/${params.restaurentId}`,

@@ -10,7 +10,7 @@ import Appbar from "../components/appbar";
 export default function Restaurent() {
   let params = useParams();
   const { showButton, showRestaurentName } =useContext(NavbarContext);
-  const [buttonClicked, setButtonClicked] =useState(true);
+  const [buttonClicked, setButtonClicked] =useState(false);
   const [dishes, setDishes] = useState([]);
   const [orders, setOrders] = useState([]);
    useEffect(() => {
@@ -38,6 +38,19 @@ export default function Restaurent() {
           });
    }, []);
 
+   function refreshOrders(){
+     axios
+       .get(
+         `https://fooder-app-server.herokuapp.com/getordersdetails/${params.restaurentId}`
+       )
+       .then(function (response) {
+         setOrders(response.data); // loading all updated orders
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+   }
+
   function handleDishes(){
       setButtonClicked(true);
   }
@@ -49,7 +62,6 @@ export default function Restaurent() {
   return (
     <div>
       <Navbar2 />
-
       {buttonClicked ? (
         dishes.map((dish) => {
           return (
@@ -60,23 +72,36 @@ export default function Restaurent() {
               price={dish.price}
               img={dish.img}
             />
-          );
-        })
+          );})
       ) : (
         <>
-          {orders.map(
-            (order) =>
-              !order.order_completed && (
-                <Order
-                  key={order.order_id}
-                  id={order.order_id}
-                  name={order.customer_name}
-                  time={order.time}
-                  total={order.order_total}
-                  items={order.order_items}
-                  accept_status={order.order_accepted}
-                />
-              )
+          {orders.length !== 0 ? (
+            orders.map(
+              (order) =>
+                !order.order_completed && (
+                  <Order
+                    key={order.order_id}
+                    id={order.order_id}
+                    name={order.customer_name}
+                    time={order.time}
+                    total={order.order_total}
+                    items={order.order_items}
+                    accept_status={order.order_accepted}
+                    refreshOrders={refreshOrders}
+                  />
+                )
+            )
+          ) : (
+            <div className="text-center pt-4">
+              <i
+                style={{ fontSize: "7rem", color: "grey" }}
+                className="bi bi-cup-straw"
+              ></i>
+              <h2 style={{ color: "grey" }} className="mt-2">
+                {" "}
+                NO ACTIVE ORDERS
+              </h2>
+            </div>
           )}
         </>
       )}
