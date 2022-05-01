@@ -74,38 +74,39 @@ export default function Dish(props){
           <div
             style={{
               textAlign: "left",
-              marginBottom:"15px"
+              marginBottom: "15px",
             }}
           >
             <Container>
               <Row>
-                <Col xs={4} lg={2}>
+                <Col xs={4} lg={2} md={2}>
                   <img
                     style={{
                       float: "left",
-                      height: "100px",
-                      width: "100px",
+                      height: "80px",
+                      width: "80px",
                       borderRadius: "5px",
-                      marginRight: "10px",
+                      marginLeft: "10px",
                     }}
                     src={"../" + props.img}
                     alt="dish-img"
                   ></img>
                 </Col>
-                <Col xs={4} lg={8}>
+                <Col xs={5} lg={8} md={8}>
                   <div style={{ marginTop: "9px" }}>
-                    <h3 style={{ fontWeight: "800" }}>{props.name}</h3>
+                    <h3 style={{ fontWeight: "600" }}>{props.name}</h3>
 
                     <h6 style={{ fontSize: "1.2rem", color: "grey" }}>
                       {"₹ "} {props.price}
                     </h6>
                   </div>
                 </Col>
-                <Col xs={4} lg={2}>
+                <Col xs={3} lg={2} md={2}>
                   <div
                     className="form-check form-switch"
                     style={{
                       marginTop: "30px",
+                      marginRight:"15px",
                       float: "right",
                     }}
                   >

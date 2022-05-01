@@ -25,17 +25,8 @@ export default function Restaurent() {
        })
        .catch(function (error) {
          console.log(error);
-       });
-        axios
-          .get(
-            `https://fooder-app-server.herokuapp.com/getordersdetails/${params.restaurentId}`
-          )
-          .then(function (response) {
-            setOrders(response.data); // loading all orders
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+       });  
+       refreshOrders();
    }, []);
 
    function refreshOrders(){
@@ -44,13 +35,14 @@ export default function Restaurent() {
          `https://fooder-app-server.herokuapp.com/getordersdetails/${params.restaurentId}`
        )
        .then(function (response) {
-         setOrders(response.data); // loading all updated orders
+         setOrders(response.data); // loading all updated orders  
        })
        .catch(function (error) {
          console.log(error);
        });
    }
 
+   // use web sockets to keep adding and updating new orders automatically
   function handleDishes(){
       setButtonClicked(true);
   }
@@ -58,6 +50,7 @@ export default function Restaurent() {
   function handleOrders(){
      setButtonClicked(false);
   }
+  console.log("Called");
 
   return (
     <div>
