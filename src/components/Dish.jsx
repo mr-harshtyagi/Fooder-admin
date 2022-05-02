@@ -8,30 +8,23 @@ export default function Dish(props){
   const [checked, setChecked] = useState("");
   const [status, setStatus] = useState("");
   const [color, setColor] = useState("");
-  const [isLoaded ,setIsLoaded] =useState(false)
-
   useEffect(()=>{
-    axios
-      .get(`https://fooder-app-server.herokuapp.com/dishstatus/${props.id}`)
-      .then((response) => {
-        if (response.data) {
-          setCheckValue(true);
-          setChecked("checked");
-          setStatus("In Stock");
-          setColor("green");
-          setIsLoaded(true);
-        } else {
-          setCheckValue(false);
-          setChecked("");
-          setStatus("Out of Stock");
-          setColor("red");
-          setIsLoaded(true);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (props.status) {
+      setCheckValue(true);
+      setChecked("checked");
+      setStatus("In Stock");
+      setColor("green"); 
+    } else {
+      setCheckValue(false);
+      setChecked("");
+      setStatus("Out of Stock");
+      setColor("red");
+    }
+
   },[])
+  
+        
+     
   
   function handleClick(event){
     if(event.target.value === "false") {
@@ -70,7 +63,6 @@ export default function Dish(props){
   }
     return (
       <div>
-        {isLoaded ? (
           <div
             style={{
               textAlign: "left",
@@ -133,11 +125,9 @@ export default function Dish(props){
               </Row>
             </Container>
           </div>
-        ) : (
           <div className="text-center mt-5">
             <BeatLoader color={"#444645"} size={15} />
           </div>
-        )}
       </div>
     );
 }

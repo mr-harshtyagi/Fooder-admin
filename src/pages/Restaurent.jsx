@@ -16,16 +16,25 @@ export default function Restaurent() {
    useEffect(() => {
      axios
        .get(
-         `https://fooder-app-server.herokuapp.com/getrestaurentdetails/${params.restaurentId}`
+         `https://fooder-app-server.herokuapp.com/alldishes/${params.restaurentId}`
        )
        .then(function (response) {
-         setDishes(response.data.dish); // loading all dishes
-         showButton(response.data.status);
-         showRestaurentName(response.data.name);
+         setDishes(response.data);
        })
        .catch(function (error) {
          console.log(error);
        });  
+       axios
+         .get(
+           `https://fooder-app-server.herokuapp.com/getrestaurentdetails/${params.restaurentId}`
+         )
+         .then(function (response) {
+           showButton(response.data.status);
+           showRestaurentName(response.data.name);
+         })
+         .catch(function (error) {
+           console.log(error);
+         });  
        refreshOrders();
    }, []);
 
@@ -56,15 +65,24 @@ export default function Restaurent() {
     <div>
       <Navbar2 />
       {buttonClicked ? (
-        dishes.map((dish) => {
+        dishes.map((category) => {
           return (
-            <Dish
-              key={dish.id}
-              id={dish.id}
-              name={dish.name}
-              price={dish.price}
-              img={dish.img}
-            />
+            <>
+            <h1 style={{textDecoration:"underline", textAlign:"center",fontWeight:"bold"}}>{category.category_name}</h1>
+            {category.items.map((dish)=>{
+              return (
+                <Dish
+                  key={dish.id}
+                  id={dish.id}
+                  name={dish.name}
+                  price={dish.price}
+                  img={dish.img}
+                  status={dish.status}
+                />
+              );
+            })}
+              
+            </>
           );})
       ) : (
         <>
