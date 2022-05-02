@@ -1,40 +1,37 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import BeatLoader from "react-spinners/BeatLoader"
 import {Container, Row,Col } from "react-bootstrap";
 
 export default function Dish(props){
-  const [checkValue, setCheckValue]= useState(false);
-  const [checked, setChecked] = useState("");
+  const [checkValue, setCheckValue]= useState("false");
+  const [checked, setChecked] = useState();
   const [status, setStatus] = useState("");
   const [color, setColor] = useState("");
   useEffect(()=>{
-    if (props.status) {
-      setCheckValue(true);
+    if (props.status === true ) {
+      setCheckValue("true");
       setChecked("checked");
       setStatus("In Stock");
       setColor("green"); 
     } else {
-      setCheckValue(false);
+      setCheckValue("false");
       setChecked("");
       setStatus("Out of Stock");
       setColor("red");
     }
-
   },[])
   
-        
-     
   
   function handleClick(event){
     if(event.target.value === "false") {
       axios
         .patch(`https://fooder-app-server.herokuapp.com/dish/${props.id}`, {
-          status: true,
+          status: "true",
         })
         .then(function (response) {
           if (response.status === 200);
           console.log(`Dish ${props.id} status changed to In Stock`);
+          props.refreshDishes();
         })
         .catch(function (error) {
           console.log(error);
@@ -47,11 +44,12 @@ export default function Dish(props){
     if (event.target.value === "true") {
       axios
         .patch(`https://fooder-app-server.herokuapp.com/dish/${props.id}`, {
-          status: false,
+          status: "false",
         })
         .then(function (response) {
           if (response.status === 200);
           console.log(`Dish ${props.id} status changed to Out of Stock`);
+          props.refreshDishes();
         })
         .catch(function (error) {
           console.log(error);
@@ -124,9 +122,6 @@ export default function Dish(props){
                 </Col>
               </Row>
             </Container>
-          </div>
-          <div className="text-center mt-5">
-            <BeatLoader color={"#444645"} size={15} />
           </div>
       </div>
     );

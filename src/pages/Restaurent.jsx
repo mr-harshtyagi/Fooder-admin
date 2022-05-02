@@ -37,6 +37,18 @@ export default function Restaurent() {
          });  
        refreshOrders();
    }, []);
+    function refreshDishes() {
+     axios
+       .get(
+         `https://fooder-app-server.herokuapp.com/alldishes/${params.restaurentId}`
+       )
+       .then(function (response) {
+         setDishes(response.data);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
 
    function refreshOrders(){
      axios
@@ -59,7 +71,6 @@ export default function Restaurent() {
   function handleOrders(){
      setButtonClicked(false);
   }
-  console.log("Called");
 
   return (
     <div>
@@ -68,7 +79,8 @@ export default function Restaurent() {
         dishes.map((category) => {
           return (
             <>
-            <h1 style={{textDecoration:"underline", textAlign:"center",fontWeight:"bold"}}>{category.category_name}</h1>
+            <h1 style={{textDecoration:"underline", textAlign:"center",fontWeight:"bold",fontSize:"2rem"}}>{category.category_name}</h1>
+            <hr/>
             {category.items.map((dish)=>{
               return (
                 <Dish
@@ -78,6 +90,7 @@ export default function Restaurent() {
                   price={dish.price}
                   img={dish.img}
                   status={dish.status}
+                  refreshDishes={refreshDishes}
                 />
               );
             })}
