@@ -69,14 +69,15 @@ export default function Dish(props){
           >
             <Container>
               <Row>
-                <Col xs={4} lg={2} md={2}>
+                <Col xs={3} lg={2} md={2}>
                   <img
                     style={{
                       float: "left",
                       height: "80px",
                       width: "80px",
                       borderRadius: "5px",
-                      marginLeft: "10px",
+                      marginLeft: "5px",
+                      paddingRight:"10px"
                     }}
                     src={"../" + props.img}
                     alt="dish-img"
@@ -91,7 +92,7 @@ export default function Dish(props){
                     </h6>
                   </div>
                 </Col>
-                <Col xs={4} lg={2} md={2}>
+                <Col xs={5} lg={2} md={2}>
                   <div
                     className="form-check form-switch"
                     style={{
