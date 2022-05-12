@@ -79,7 +79,7 @@ export default function Restaurent() {
         dishes.map((category) => {
           return (
             <>
-            <h1 style={{textDecoration:"underline", textAlign:"center",fontWeight:"bold",fontSize:"2rem"}}>{category.category_name}</h1>
+            <h1 style={{ textAlign:"center",fontWeight:"bold",fontSize:"2rem"}}>{category.category_name}</h1>
             <hr/>
             {category.items.map((dish)=>{
               return (
